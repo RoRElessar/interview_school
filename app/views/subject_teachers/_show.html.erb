@@ -1,0 +1,4 @@
+<li id='teacher-subject-<%= subject_teacher.id %>'>
+  <%= link_to subject_teacher.subject.name, subject_path(subject_teacher.subject) %> (<%= subject_teacher.level %>)
+  <%= link_to 'Edit', edit_subject_teacher_path(subject_teacher), remote: true %>
+</li>

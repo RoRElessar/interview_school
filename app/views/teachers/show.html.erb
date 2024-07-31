@@ -1,0 +1,23 @@
+<p>
+  <strong>First name:</strong>
+  <%= @teacher.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @teacher.last_name %>
+</p>
+
+<%= link_to 'Edit', edit_teacher_path(@teacher) %> |
+<%= link_to 'Back', teachers_path %>
+
+<p>
+  <strong>Classes</strong>
+</p>
+
+<ul>
+  <% @teacher.subject_teachers.each do |subject_teacher| %>
+    <%= render 'subject_teachers/show', subject_teacher: subject_teacher %>
+  <% end %>
+</ul>
+<%= render 'subject_teachers/new' %>

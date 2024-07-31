@@ -1,0 +1,19 @@
+<p>
+  <strong>Name:</strong>
+  <%= @subject.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @subject.description %>
+</p>
+
+<strong>Teachers</strong>
+<ul>
+  <% @subject.subject_teachers.each do |teacher_subject| %>
+    <li><%= link_to teacher_subject.teacher.full_name, teacher_path(teacher_subject.teacher) %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Edit', edit_subject_path(@subject) %> |
+<%= link_to 'Back', subjects_path %>

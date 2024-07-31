@@ -1,0 +1,23 @@
+<li id='teacher-subject-<%= @subject_teacher.id %>'>
+  <%= form_with model: @subject_teacher, remote: true do |form| %>
+    <% if @subject_teacher.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@subject_teacher.errors.count, "error") %> prohibited this teacher from being saved:</h2>
+
+        <ul>
+          <% @subject_teacher.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.number_field :level %>
+
+      <%= form.submit 'Update' %>
+      <%= link_to 'Remove', subject_teacher_path(@subject_teacher), remote: true, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <%= link_to 'Cancel', subject_teacher_path(@subject_teacher), remote: true %>
+    </div>
+  <% end %>
+</li>

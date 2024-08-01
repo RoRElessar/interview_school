@@ -1,0 +1,29 @@
+<div id='new-teacher-subject'>
+  <%= form_with model: @student_section, url: new_student_student_section_path(@student), create_remote: true do |form| %>
+    <% if @student_section.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@student_section.errors.count, 'error') %> prohibited this teacher from being saved:</h2>
+
+        <ul>
+          <% @student_section.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :section_id, 'Section' %>
+      <%= form.select :section_id, Section.all.collect { |section| [section.name, section.id] }, include_blank: true %>
+    </div>
+
+    <div class="field">
+      <%= form.label :time_slot %>
+      <%#= form.select :time_slot, time_options(section) %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit 'Add' %>
+    </div>
+  <% end %>
+</div>

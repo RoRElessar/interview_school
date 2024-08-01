@@ -2,7 +2,7 @@
   <%= form_with model: @subject_teacher, url: teacher_subject_teachers_path(@teacher), create_remote: true do |form| %>
     <% if @subject_teacher.errors.any? %>
       <div id="error_explanation">
-        <h2><%= pluralize(@subject_teacher.errors.count, "error") %> prohibited this teacher from being saved:</h2>
+        <h2><%= pluralize(@subject_teacher.errors.count, 'error') %> prohibited this teacher from being saved:</h2>
 
         <ul>
           <% @subject_teacher.errors.full_messages.each do |message| %>
@@ -14,7 +14,7 @@
 
     <div class="field">
       <%= form.label :subject %>
-      <%= form.select :subject_id, options_from_collection_for_select(Subject.all.where.not(id: @teacher.subjects), :id, :name) %>
+      <%= form.select :subject_id, options_from_collection_for_select(Subject.where.not(id: @teacher.subjects), :id, :name) %>
     </div>
 
     <div class="field">

@@ -1,0 +1,23 @@
+<p>
+  <strong>First Name:</strong>
+  <%= @student.first_name %>
+</p>
+
+<p>
+  <strong>Last Name:</strong>
+  <%= @student.last_name %>
+</p>
+
+<p>
+  <strong>Birth Date:</strong>
+  <%= @student.birth_date.strftime('%d.%m.%Y') %>
+</p>
+
+<%= link_to 'Edit', edit_student_path(@student) %> |
+<%= link_to 'Back', students_path %>
+
+<br>
+<br>
+
+<%= render 'section_list' if @student.sections.any? %>
+<%= render 'student_sections/new' %>

@@ -10,9 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_31_105206) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_01_095201) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "classrooms", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_classrooms_on_name", unique: true
+  end
+
+  create_table "sections", force: :cascade do |t|
+    t.bigint "teacher_id", null: false
+    t.bigint "subject_id", null: false
+    t.bigint "classroom_id", null: false
+    t.integer "duration"
+    t.string "week_days", default: [], array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["classroom_id"], name: "index_sections_on_classroom_id"
+    t.index ["subject_id"], name: "index_sections_on_subject_id"
+    t.index ["teacher_id"], name: "index_sections_on_teacher_id"
+  end
+
+  create_table "student_sections", force: :cascade do |t|
+    t.bigint "student_id", null: false
+    t.bigint "section_id", null: false
+    t.time "start_time"
+    t.time "end_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["section_id"], name: "index_student_sections_on_section_id"
+    t.index ["student_id"], name: "index_student_sections_on_student_id"
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.date "birth_date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "subject_teachers", force: :cascade do |t|
     t.bigint "teacher_id", null: false
@@ -39,6 +78,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_31_105206) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "sections", "classrooms"
+  add_foreign_key "sections", "subjects"
+  add_foreign_key "sections", "teachers"
+  add_foreign_key "student_sections", "sections"
+  add_foreign_key "student_sections", "students"
   add_foreign_key "subject_teachers", "subjects"
   add_foreign_key "subject_teachers", "teachers"
 end

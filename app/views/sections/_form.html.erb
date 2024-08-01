@@ -1,0 +1,61 @@
+<%= form_with(model: section, local: true, data: { turbo: false }) do |form| %>
+  <% if section.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(section.errors.count, 'error') %> prohibited this subject from being saved:</h2>
+      <%= section.errors.full_messages %>
+
+      <ul>
+        <% section.errors.full_messages do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :teacher_id, 'Teachers' %>
+    <%= form.select :teacher_id,
+                    options_from_collection_for_select(
+                      Teacher.all,
+                      :id,
+                      :full_name,
+                    ),
+                    {} %>
+  </div>
+
+  <div class="field">
+    <%= form.label :subject_id, 'Subjects' %>
+    <%= form.select :subject_id,
+                    options_from_collection_for_select(
+                      Subject.all,
+                      :id,
+                      :name,
+                    ),
+                    {} %>
+  </div>
+
+  <div class="field">
+    <%= form.label :classroom_id, 'Classroom' %>
+    <%= form.select :classroom_id,
+                    options_from_collection_for_select(
+                      Classroom.all,
+                      :id,
+                      :name,
+                      ),
+                    {} %>
+  </div>
+
+  <div class="field">
+    <%= form.label :week_days %>
+    <%= form.select :week_days, Date::DAYNAMES, {}, multiple: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :duration %>
+    <%= form.select :duration, Section::DURATION_OPTIONS %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

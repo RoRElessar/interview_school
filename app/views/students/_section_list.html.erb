@@ -1,0 +1,27 @@
+<p>
+  <strong>Sections</strong>
+</p>
+
+<table>
+  <thead>
+  <tr>
+    <td>Teacher</td>
+    <td>Subject</td>
+    <td>Classroom</td>
+    <td>Week days</td>
+    <td>Duration</td>
+    <td></td>
+  </tr>
+  </thead>
+
+  <tbody>
+    <% @student.sections.each do |section| %>
+    <td><%= section.teacher.full_name %></td>
+    <td><%= section.subject.name %></td>
+    <td><%= section.classroom.name %></td>
+    <td><%= section.week_days.join(', ') %></td>
+    <td><%= section.duration %></td>
+    <td><%= link_to 'Remove Section' %></td>
+    <% end %>
+  </tbody>
+</table>
